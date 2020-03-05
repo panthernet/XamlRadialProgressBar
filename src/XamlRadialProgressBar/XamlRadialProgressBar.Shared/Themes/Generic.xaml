@@ -1,0 +1,62 @@
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:XamlRadialProgressBar">
+	<local:ProgressToAngleConverter x:Key="ProgressConverter"/>
+
+	<Style TargetType="{x:Type local:RadialProgressBar}">
+		<Setter Property="Foreground" Value="LightSlateGray"/>
+		<Setter Property="Background" Value="Transparent"/>
+		<Setter Property="BorderBrush" Value="Transparent"/>
+		<Setter Property="BorderThickness" Value="0"/>
+		<Setter Property="InnerBackgroundBrush" Value="Transparent"/>
+		<Setter Property="OuterBackgroundBrush" Value="Transparent"/>
+		<Setter Property="Padding" Value="30"/>
+		<Setter Property="ArcWidth" Value="10"/>
+		<Setter Property="ArcMode" Value="Fill"/>
+		<Setter Property="ArcRotationDegree" Value="270"/>
+		<Setter Property="ArcDirection" Value="Clockwise"/>
+		<Setter Property="ShapeModeStep" Value="3"/>
+		<Setter Property="ShapeModeWidth" Value="1"/>
+		<Setter Property="ShapeModeShape" Value="Rectangle"/>
+		<Setter Property="ShapeModeUseFade" Value="True"/>
+		<Setter Property="ShapeRotationAdjustment" Value="0"/>
+
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="{x:Type local:RadialProgressBar}">
+					<Grid>
+						<Ellipse Stroke="Transparent" Fill="{TemplateBinding Background}"/>
+						<Ellipse Stroke="Transparent" Margin="{TemplateBinding Padding}" Fill="{TemplateBinding InnerBackgroundBrush}"/>
+						<local:Arc StrokeThickness="{TemplateBinding ArcWidth}" Margin="5"
+								   ProgressBorderBrush="{TemplateBinding BorderBrush}"
+								   ProgressBorderThickness="{TemplateBinding BorderThickness}"
+						           ProgressFillBrush="{TemplateBinding Foreground}"
+						           ProgressBackgroundBrush="{TemplateBinding OuterBackgroundBrush}"
+								   ArcMode="{TemplateBinding ArcMode}"
+								   OriginRotationDegrees="{TemplateBinding ArcRotationDegree}"
+								   ShapeModeStep="{TemplateBinding ShapeModeStep}"
+								   ShapeModeWidth="{TemplateBinding ShapeModeWidth}"
+								   ShapeModeShape="{TemplateBinding ShapeModeShape}"
+								   ShapeModeUseFade="{TemplateBinding ShapeModeUseFade}"
+								   ShapeRotationAdjustment="{TemplateBinding ShapeRotationAdjustment}"
+								   Direction="{TemplateBinding ArcDirection}">
+							<local:Arc.StartAngle>
+								<MultiBinding Converter="{StaticResource ProgressConverter}">
+									<Binding Path="Minimum" RelativeSource="{RelativeSource TemplatedParent}"/>
+									<Binding Path="." RelativeSource="{RelativeSource TemplatedParent}"/>
+								</MultiBinding>
+							</local:Arc.StartAngle>
+							<local:Arc.EndAngle>
+								<MultiBinding Converter="{StaticResource ProgressConverter}">
+									<Binding Path="Value" RelativeSource="{RelativeSource TemplatedParent}"/>
+									<Binding Path="." RelativeSource="{RelativeSource TemplatedParent}"/>
+								</MultiBinding>
+							</local:Arc.EndAngle>
+						</local:Arc>
+					</Grid>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+</ResourceDictionary>

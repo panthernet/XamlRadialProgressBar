@@ -1,0 +1,106 @@
+﻿<UserControl
+    x:Class="Sample.Shared.DesktopControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:xrpb="http://XamlRadialProgressBar/DotNet"
+    mc:Ignorable="d"
+		UseLayoutRounding="True"
+		SnapsToDevicePixels="True"
+    d:DesignHeight="300"
+    d:DesignWidth="400">
+
+    <Grid>
+	    <WrapPanel ItemWidth="150" ItemHeight="150">
+		    <Grid>
+			    <Grid.RowDefinitions>
+				    <RowDefinition Height="*"/>
+				    <RowDefinition Height="Auto"/>
+          </Grid.RowDefinitions>
+			    <xrpb:RadialProgressBar Value="{Binding Value1, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" HorizontalAlignment="Center" 
+			                           Width="100" Height="100"
+			                           Foreground="{StaticResource ThemeForeground}"/>
+			    <TextBlock Text="Solid Fill" Grid.Row="1" HorizontalAlignment="Center" FontSize="16" TextWrapping="Wrap" TextAlignment="Center"/>
+		    </Grid>
+		    <Grid>
+			    <Grid.RowDefinitions>
+				    <RowDefinition Height="*"/>
+				    <RowDefinition Height="Auto"/>
+			    </Grid.RowDefinitions>
+			    <xrpb:RadialProgressBar Value="{Binding Value2, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" HorizontalAlignment="Center"
+			                           Width="100" Height="100" ArcWidth="25" 
+			                           ArcDirection="Counterclockwise" ArcRotationDegree="90"
+			                           Foreground="{StaticResource ThemeForeground}" OuterBackgroundBrush="DarkSlateGray"/>
+			    <TextBlock Text="Solid Fill With Background" Grid.Row="1" HorizontalAlignment="Center" FontSize="16" TextWrapping="Wrap" TextAlignment="Center"/>
+		    </Grid>
+		    <Grid>
+			    <Grid.RowDefinitions>
+				    <RowDefinition Height="*"/>
+				    <RowDefinition Height="Auto"/>
+			    </Grid.RowDefinitions>
+			    <xrpb:RadialProgressBar Value="{Binding Value3, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" HorizontalAlignment="Center"
+			                           Width="100" Height="100" ArcWidth="25" InnerBackgroundBrush="#31313F"
+																			 BorderThickness="6" BorderBrush="{StaticResource ThemeForeground2}"
+			                           Foreground="{StaticResource ThemeForeground}" OuterBackgroundBrush="DarkSlateGray"/>
+          <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"
+                     FontWeight="Bold" FontSize="18">
+							<Run Text="{Binding Value3, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/><Run Text="%"/>
+          </TextBlock>
+			    <TextBlock Text="Solid Fill With Text" Grid.Row="1" HorizontalAlignment="Center" FontSize="16" TextWrapping="Wrap" TextAlignment="Center"/>
+		    </Grid>
+
+		    <Grid>
+			    <Grid.RowDefinitions>
+				    <RowDefinition Height="*"/>
+				    <RowDefinition Height="Auto"/>
+			    </Grid.RowDefinitions>
+			    <xrpb:RadialProgressBar Value="{Binding Value4, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" HorizontalAlignment="Center"
+			                           Width="100" Height="100" ArcWidth="25" InnerBackgroundBrush="#31313F"
+			                           ArcMode="Shape" ShapeModeStep="8" ShapeModeWidth="1" ShapeModeShape="Rectangle"
+			                           Foreground="{StaticResource ThemeForeground}"/>
+			    <TextBlock Text="Shape Mode Thin Rectangles" Grid.Row="1" HorizontalAlignment="Center" FontSize="16" TextWrapping="Wrap" TextAlignment="Center"/>
+		    </Grid>
+
+		    <Grid>
+			    <Grid.RowDefinitions>
+				    <RowDefinition Height="*"/>
+				    <RowDefinition Height="Auto"/>
+			    </Grid.RowDefinitions>
+			    <xrpb:RadialProgressBar Value="{Binding Value4, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" HorizontalAlignment="Center"
+			                           Width="100" Height="100" ArcWidth="25" InnerBackgroundBrush="#31313F"
+			                           ArcDirection="Counterclockwise" ArcRotationDegree="90"
+			                           ArcMode="Shape" ShapeModeStep="30" ShapeModeWidth="10" ShapeModeShape="Rectangle"
+			                           Foreground="{StaticResource ThemeForeground}"/>
+			    <TextBlock Text="Shape Mode Thick Rectangles" Grid.Row="1" HorizontalAlignment="Center" FontSize="16" TextWrapping="Wrap" TextAlignment="Center"/>
+		    </Grid>
+
+		    <Grid>
+			    <Grid.RowDefinitions>
+				    <RowDefinition Height="*"/>
+				    <RowDefinition Height="Auto"/>
+			    </Grid.RowDefinitions>
+			    <xrpb:RadialProgressBar Value="{Binding Value4, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" HorizontalAlignment="Center"
+			                           Width="100" Height="100" ArcWidth="25" InnerBackgroundBrush="#31313F"
+			                           
+			                           ArcMode="Shape" ShapeModeStep="15" ShapeModeWidth="4" ShapeModeShape="Rectangle"
+																			 ShapeRotationAdjustment="45"
+			                           Foreground="{StaticResource ThemeForeground}"/>
+			    <TextBlock Text="Shape Mode Custom Degree" Grid.Row="1" HorizontalAlignment="Center" FontSize="16" TextWrapping="Wrap" TextAlignment="Center"/>
+		    </Grid>
+
+		    <Grid>
+			    <Grid.RowDefinitions>
+				    <RowDefinition Height="*"/>
+				    <RowDefinition Height="Auto"/>
+			    </Grid.RowDefinitions>
+			    <xrpb:RadialProgressBar Value="{Binding Value1, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" HorizontalAlignment="Center"
+			                           Width="100" Height="100" OuterBackgroundBrush="#31313F"
+			                           ArcMode="Pie"
+			                           Foreground="{StaticResource ProgressBarRadialGradientBrush}"/>
+			    <TextBlock Text="Pie Mode With Radial Gradient" Grid.Row="1" HorizontalAlignment="Center" FontSize="16" TextWrapping="Wrap" TextAlignment="Center"/>
+		    </Grid>
+
+	    </WrapPanel>
+    </Grid>
+</UserControl>

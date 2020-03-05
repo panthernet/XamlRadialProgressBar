@@ -1,0 +1,23 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:xrpb="http://XamlRadialProgressBar/DotNet">
+
+  <SolidColorBrush x:Key="ThemeBackground" Color="#1A1A22"/>
+  <SolidColorBrush x:Key="ThemeForeground" Color="#4FD0FF"/>
+  <SolidColorBrush x:Key="ThemeForeground2" Color="#4F70FF"/>
+
+  <RadialGradientBrush x:Key="ProgressBarRadialGradientBrush"
+		GradientOrigin="0.5,0.5" 
+		Center="0.5,0.5" RadiusX="0.5" RadiusY="0.5">
+		<RadialGradientBrush.GradientStops>
+			<GradientStop Color="CornflowerBlue" Offset="0" />
+			<GradientStop Color="DodgerBlue" Offset="0.25" />
+			<GradientStop Color="DeepSkyBlue" Offset="0.75" />
+			<GradientStop Color="LightSkyBlue" Offset="1" />
+		</RadialGradientBrush.GradientStops>
+	</RadialGradientBrush>
+
+  <xrpb:ProgressToAngleConverter x:Key="ProgressConverter"/>
+
+
+</ResourceDictionary>

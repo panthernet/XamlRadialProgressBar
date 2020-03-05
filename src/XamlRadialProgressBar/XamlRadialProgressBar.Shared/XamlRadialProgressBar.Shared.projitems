@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>b5c88ca2-578b-42d9-8075-91b973dc3973</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>XamlRadialProgressBar.Shared</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Page Include="$(MSBuildThisFileDirectory)Themes\Generic.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Classes\Arc.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Classes\ArcMode.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Classes\ArcShape.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Classes\ProgressToAngleConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Classes\RadialProgressBar.cs" />
+  </ItemGroup>
+</Project>
