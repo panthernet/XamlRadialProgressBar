@@ -11,6 +11,9 @@ Display customizable radial progress bars for all your needs.
 * Different modes: Fill, Shape, Pie
 * Clockwise and counter-clockwise directions
 
+![bandicam 2020-03-05 15-26-32-011](https://user-images.githubusercontent.com/5926603/75991159-58066000-5ef6-11ea-981e-e8086c069e3d.gif)
+
+
 ### Simple usage
 
 ```
@@ -26,5 +29,3 @@ xmlns:xrpb="http://XamlRadialProgressBar/DotNet"
 ```
 
 For detailed usage tips look in the Generic.xaml template and sample applicaions.
-
-![bandicam 2020-03-05 15-26-32-011](https://user-images.githubusercontent.com/5926603/75991159-58066000-5ef6-11ea-981e-e8086c069e3d.gif)
