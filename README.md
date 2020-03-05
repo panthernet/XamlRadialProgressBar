@@ -22,9 +22,9 @@ xmlns:xrpb="http://XamlRadialProgressBar/DotNet"
 ...
 
 <Grid>
-		<xrpb:RadialProgressBar Value="{Binding Value1, UpdateSourceTrigger=PropertyChanged}"
-			                      Width="100" Height="100"
-			                      Foreground="White" />
+    <xrpb:RadialProgressBar Value="{Binding Value1, UpdateSourceTrigger=PropertyChanged}"
+			    Width="100" Height="100"
+			    Foreground="White" />
 </Grid>
 ```
 
