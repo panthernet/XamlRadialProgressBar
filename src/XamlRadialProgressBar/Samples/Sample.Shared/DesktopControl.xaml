@@ -11,7 +11,7 @@
     d:DesignHeight="300"
     d:DesignWidth="400">
 
-    <Grid>
+    <!--<Grid>
 	    <WrapPanel ItemWidth="150" ItemHeight="150">
 		    <Grid>
 			    <Grid.RowDefinitions>
@@ -102,5 +102,17 @@
 		    </Grid>
 
 	    </WrapPanel>
+    </Grid>-->
+    <Grid>
+	    <Grid.RowDefinitions>
+		    <RowDefinition Height="*"/>
+		    <RowDefinition Height="Auto"/>
+	    </Grid.RowDefinitions>
+	    <xrpb:RadialProgressBar Value="{Binding Value4, UpdateSourceTrigger=PropertyChanged}"
+	                            ArcWidth="25" InnerBackgroundBrush="#31313F"
+	                            ArcDirection="Counterclockwise" ArcRotationDegree="90"
+	                            ArcMode="Shape" ShapeModeStep="30" ShapeModeWidth="10" ShapeModeShape="Rectangle"
+	                            Foreground="{StaticResource ThemeForeground}"/>
+		<TextBlock Text="Solid Fill With Background" Grid.Row="1" HorizontalAlignment="Center" FontSize="16" TextWrapping="Wrap" TextAlignment="Center"/>
     </Grid>
 </UserControl>

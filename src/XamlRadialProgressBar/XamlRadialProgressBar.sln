@@ -17,6 +17,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XamlRadialProgressBar.DotNe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sample.DotNet", "Samples\Sample.DotNet\Sample.DotNet.csproj", "{97521C01-DBF9-4987-A751-F7AC87B79F33}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8442BB59-27E0-441A-BEC5-146B7D3345EC}"
+	ProjectSection(SolutionItems) = preProject
+		SHaredAssembly.cs = SHaredAssembly.cs
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		XamlRadialProgressBar.Shared\XamlRadialProgressBar.Shared.projitems*{158bee8c-66e1-48f4-a207-c3ff59d7461c}*SharedItemsImports = 4

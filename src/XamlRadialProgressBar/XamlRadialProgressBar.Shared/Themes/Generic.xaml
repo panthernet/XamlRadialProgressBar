@@ -40,7 +40,8 @@
 								   ShapeModeShape="{TemplateBinding ShapeModeShape}"
 								   ShapeModeUseFade="{TemplateBinding ShapeModeUseFade}"
 								   ShapeRotationAdjustment="{TemplateBinding ShapeRotationAdjustment}"
-								   Direction="{TemplateBinding ArcDirection}">
+								   Direction="{TemplateBinding ArcDirection}"
+								   x:Name="PART_Arc">
 							<local:Arc.StartAngle>
 								<MultiBinding Converter="{StaticResource ProgressConverter}">
 									<Binding Path="Minimum" RelativeSource="{RelativeSource TemplatedParent}"/>

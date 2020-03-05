@@ -171,11 +171,27 @@ namespace XamlRadialProgressBar
                 new UIPropertyMetadata(0d));
         #endregion
 
+        private Arc _arc;
+
         public RadialProgressBar()
         {
             DefaultStyleKey = typeof(RadialProgressBar);
             // UseLayoutRounding = true;
             //SnapsToDevicePixels = true;
+            SizeChanged += RadialProgressBar_SizeChanged;
+        }
+
+        private void RadialProgressBar_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            if(_arc == null) return;
+            if(_arc.ArcMode == ArcMode.Shape)
+                _arc.RecalculateShapes();
+        }
+
+        public override void OnApplyTemplate()
+        {
+            base.OnApplyTemplate();
+            _arc = (Arc)Template.FindName("PART_Arc", this);
         }
     }
 }

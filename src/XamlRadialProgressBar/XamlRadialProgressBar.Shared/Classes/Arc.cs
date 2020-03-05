@@ -272,7 +272,7 @@ namespace XamlRadialProgressBar
                 //var minAngle = Math.Min(StartAngle, EndAngle);
                 var maxAngle = Math.Max(StartAngle, EndAngle);
                 var max = Math.Round(maxAngle / ShapeModeStep);
-                _data = _data ?? GetAngleData(ShapeModeStep);
+                _data = _data ?? GetAngleData();
                 //_data = GetAngleData(ShapeModeStep);
                 for (int i = 0; i < max; i++)
                 {
@@ -348,10 +348,10 @@ namespace XamlRadialProgressBar
             _clipPen.Freeze();
         }
 
-        private List<AngleData> GetAngleData(int step)
+        private List<AngleData> GetAngleData()
         {
             var minAngle = Math.Min(StartAngle, EndAngle);
-            var maxAngle = 359.9;
+            var maxAngle = 359.999;
 
             var dic = new List<AngleData>();
             var startAngle = minAngle;
@@ -365,13 +365,13 @@ namespace XamlRadialProgressBar
                     break;
                 var a = (Direction == SweepDirection.Clockwise ? -1 : 1) * (startAngle + OriginRotationDegrees) * (Math.PI / 180);
 
-                var pt = new Point();
-                pt.Y = centerPoint.Y - radiusY * Math.Sin(a);
-                pt.X = centerPoint.X + radiusX * Math.Cos(a);
+                var pt = new Point
+                {
+                    Y = centerPoint.Y - radiusY * Math.Sin(a), X = centerPoint.X + radiusX * Math.Cos(a)
+                };
                 var a2 = GetAngleBetweenPoints(pt, centerPoint);
                 dic.Add(new AngleData { StartPoint = pt, Angle = a2});
-                startAngle += step;
-
+                startAngle += ShapeModeStep;
             }
 
             return dic;
@@ -395,7 +395,7 @@ namespace XamlRadialProgressBar
         {
             var width = ArcMode == ArcMode.Pie ? RenderSize.Width * .5 : StrokeThickness;
             var startPoint = PointAtAngle(full ? 0d : Math.Min(StartAngle, EndAngle), Direction);
-            var endPoint = PointAtAngle(full ? 359.9d : Math.Max(StartAngle, EndAngle), Direction);
+            var endPoint = PointAtAngle(full ? 359.999d : Math.Max(StartAngle, EndAngle), Direction);
 
             var arcSize = new Size(Math.Max(0, (RenderSize.Width - width) / 2),
                 Math.Max(0, (RenderSize.Height - width) / 2));
@@ -434,6 +434,11 @@ namespace XamlRadialProgressBar
             }
 
             return new Point(x, y);
+        }
+
+        internal void RecalculateShapes()
+        {
+            _data = GetAngleData();
         }
     }
 }
