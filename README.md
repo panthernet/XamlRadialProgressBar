@@ -1,4 +1,5 @@
 # Xaml Radial Progress Bar
+[![NuGet Version and Downloads count](https://buildstats.info/nuget/XamlRadialProgressBar)](https://www.nuget.org/packages/XamlRadialProgressBar)
 
 Display customizable radial progress bars for all your needs.
 
