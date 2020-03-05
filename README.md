@@ -4,7 +4,7 @@
 Display customizable radial progress bars for all your needs.
 
 ### Platfrom support:
-* .NET Core 2.2+
+* .NET Core 3.1+
 * .NET Framework 4.5.2+ 
 
 ### Features
