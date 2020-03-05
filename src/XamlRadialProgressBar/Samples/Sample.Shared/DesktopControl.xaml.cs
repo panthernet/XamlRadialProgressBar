@@ -1,7 +1,9 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Timers;
+using System.Windows.Input;
 
 namespace Sample.Shared
 {
@@ -69,10 +71,10 @@ namespace Sample.Shared
                     Value3 = 0;
             };
             timer3.Start();
-            var timer4 = new Timer(200);
+            var timer4 = new Timer(100);
             timer4.Elapsed += (sender, args) =>
             {
-                Value4 += 2;
+                Value4 += 3;
                 if (Value4 >= 100)
                     Value4 = 0;
             };
@@ -87,5 +89,13 @@ namespace Sample.Shared
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
         #endregion
+
+        private void UIElement_OnMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            var info = new ProcessStartInfo();
+            info.FileName = "https://github.com/panthernet/XamlRadialProgressBar";
+            info.UseShellExecute = true;
+            Process.Start(info);
+        }
     }
 }

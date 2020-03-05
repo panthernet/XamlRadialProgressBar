@@ -4,12 +4,22 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <UseWPF>true</UseWPF>
+    <StartupObject>Sample.Core.App</StartupObject>
+    <ApplicationIcon>app.ico</ApplicationIcon>
   </PropertyGroup>
 
   <Import Project="..\Sample.Shared\Sample.Shared.projitems" Label="Shared" />
 
   <ItemGroup>
+    <None Remove="app.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\..\XamlRadialProgressBar\XamlRadialProgressBar.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="app.ico" />
   </ItemGroup>
 
   <ItemGroup>

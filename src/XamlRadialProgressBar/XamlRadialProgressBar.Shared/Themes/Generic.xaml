@@ -27,7 +27,8 @@
 				<ControlTemplate TargetType="{x:Type local:RadialProgressBar}">
 					<Grid>
 						<Ellipse Stroke="Transparent" Fill="{TemplateBinding Background}"/>
-						<Ellipse Stroke="Transparent" Margin="{TemplateBinding Padding}" Fill="{TemplateBinding InnerBackgroundBrush}"/>
+						<Ellipse Stroke="Transparent" Margin="{TemplateBinding Padding}" 
+						         Fill="{TemplateBinding InnerBackgroundBrush}"/>
 						<local:Arc StrokeThickness="{TemplateBinding ArcWidth}" Margin="5"
 								   ProgressBorderBrush="{TemplateBinding BorderBrush}"
 								   ProgressBorderThickness="{TemplateBinding BorderThickness}"
@@ -40,6 +41,8 @@
 								   ShapeModeShape="{TemplateBinding ShapeModeShape}"
 								   ShapeModeUseFade="{TemplateBinding ShapeModeUseFade}"
 								   ShapeRotationAdjustment="{TemplateBinding ShapeRotationAdjustment}"
+								   IsIndeterminate="{TemplateBinding IsIndeterminate}"
+								   IndeterminateSpeedRatio="{TemplateBinding IndeterminateSpeedRatio}"
 								   Direction="{TemplateBinding ArcDirection}"
 								   x:Name="PART_Arc">
 							<local:Arc.StartAngle>

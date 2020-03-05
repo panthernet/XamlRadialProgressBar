@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Sample.Shared"
         mc:Ignorable="d"
+        Icon="/app.ico"
         Background="{StaticResource ThemeBackground}"
         Foreground="{StaticResource ThemeForeground}"
         Title="RADIAL PROGRESS BAR .NET CORE" Height="450" Width="800">

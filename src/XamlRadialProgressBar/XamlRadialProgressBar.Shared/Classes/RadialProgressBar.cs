@@ -171,6 +171,21 @@ namespace XamlRadialProgressBar
                 new UIPropertyMetadata(0d));
         #endregion
 
+        #region IndeterminateSpeedRatio
+        /// <summary>
+        /// Gets or sets speed ration for Indeterminate state animation. Default value is 1.
+        /// </summary>
+        public double IndeterminateSpeedRatio
+        {
+            get => (double)GetValue(IndeterminateSpeedRatioProperty);
+            set => SetValue(IndeterminateSpeedRatioProperty, value);
+        }
+
+        public static readonly DependencyProperty IndeterminateSpeedRatioProperty =
+            DependencyProperty.Register("IndeterminateSpeedRatio", typeof(double), typeof(RadialProgressBar),
+                new UIPropertyMetadata(1d));
+        #endregion
+
         private Arc _arc;
 
         public RadialProgressBar()

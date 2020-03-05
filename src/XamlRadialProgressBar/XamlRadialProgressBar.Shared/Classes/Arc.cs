@@ -1,14 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-#if WINDOWS_UWP
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Shapes;
-using Windows.UI.Xaml;
-#else
+using System.Timers;
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Shapes;
-#endif
 
 namespace XamlRadialProgressBar
 {
@@ -229,6 +224,99 @@ namespace XamlRadialProgressBar
             ((Arc) d)?.InvalidateVisual();
         }
         #endregion
+
+        #region IsIndeterminate
+        /// <summary>
+        /// Gets or sets the Indeterminate animation state
+        /// </summary>
+        public bool IsIndeterminate
+        {
+            get => (bool)GetValue(IsIndeterminateProperty);
+            set => SetValue(IsIndeterminateProperty, value);
+        }
+
+        public static readonly DependencyProperty IsIndeterminateProperty =
+            DependencyProperty.Register("IsIndeterminate", typeof(bool), typeof(Arc),
+                new UIPropertyMetadata(true, UpdateIndeterminate));
+
+        private static void UpdateIndeterminate(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            (d as Arc).UpdateIndeterminate();
+
+            UpdateArc(d,e);
+        }
+
+        private Timer _inTimer;
+        private volatile bool _inEnd;
+        private void UpdateIndeterminate()
+        {
+            if (IsIndeterminate)
+            {
+                _inTimer?.Dispose();
+                _inTimer = new Timer(100 * IndeterminateSpeedRatio);
+                _inTimer.Elapsed += async (sender, args) =>
+                {
+                    try
+                    {
+                        await Dispatcher.InvokeAsync(() =>
+                        {
+                            var value = (double) GetValue(EndAngleProperty) + 9;
+                            if (_inEnd)
+                            {
+                                _inEnd = false;
+                                value = 0;
+                                SetCurrentValue(EndAngleProperty, value);
+                            }
+                            else if (value >= 360)
+                            {
+                                value = 359.999;
+                                SetCurrentValue(EndAngleProperty, value);
+                                _inEnd = true;
+                            }
+                            else SetCurrentValue(EndAngleProperty, value);
+                        });
+                    }
+                    catch
+                    {
+                        // ignore
+                    }
+                };
+                _inTimer.Start();
+            }
+            else
+            {
+                _inTimer?.Stop();
+                _inTimer?.Dispose();
+                if(_inTimer != null)
+                    SetCurrentValue(EndAngleProperty, StartAngle);
+                _inTimer = null;
+            }
+        }
+
+        #endregion
+
+        #region IndeterminateSpeedRatio
+        /// <summary>
+        /// Gets or sets speed ration for Indeterminate state animation. Default value is 1.
+        /// </summary>
+        public double IndeterminateSpeedRatio
+        {
+            get => (double)GetValue(IndeterminateSpeedRatioProperty);
+            set => SetValue(IndeterminateSpeedRatioProperty, value);
+        }
+
+        public static readonly DependencyProperty IndeterminateSpeedRatioProperty =
+            DependencyProperty.Register("IndeterminateSpeedRatio", typeof(double), typeof(Arc),
+                new UIPropertyMetadata(1d, (o, args) => (o as Arc)?.UpdateIndeterminate()));
+        #endregion
+
+        public Arc()
+        {
+            Loaded += (sender, args) =>
+            {
+                UpdateIndeterminate();
+            };
+        }
 
         protected override Geometry DefiningGeometry => GetArcGeometry();
 

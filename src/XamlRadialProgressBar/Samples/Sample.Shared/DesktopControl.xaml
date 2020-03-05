@@ -11,13 +11,13 @@
     d:DesignHeight="300"
     d:DesignWidth="400">
 
-    <!--<Grid>
+    <Grid>
 	    <WrapPanel ItemWidth="150" ItemHeight="150">
 		    <Grid>
 			    <Grid.RowDefinitions>
 				    <RowDefinition Height="*"/>
 				    <RowDefinition Height="Auto"/>
-          </Grid.RowDefinitions>
+				</Grid.RowDefinitions>
 			    <xrpb:RadialProgressBar Value="{Binding Value1, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" HorizontalAlignment="Center" 
 			                           Width="100" Height="100"
 			                           Foreground="{StaticResource ThemeForeground}"/>
@@ -100,19 +100,32 @@
 			                           Foreground="{StaticResource ProgressBarRadialGradientBrush}"/>
 			    <TextBlock Text="Pie Mode With Radial Gradient" Grid.Row="1" HorizontalAlignment="Center" FontSize="16" TextWrapping="Wrap" TextAlignment="Center"/>
 		    </Grid>
-
-	    </WrapPanel>
-    </Grid>-->
-    <Grid>
+		    <Grid>
+			    <Grid.RowDefinitions>
+				    <RowDefinition Height="*"/>
+				    <RowDefinition Height="Auto"/>
+			    </Grid.RowDefinitions>
+			    <xrpb:RadialProgressBar IsIndeterminate="True" VerticalAlignment="Center" HorizontalAlignment="Center" 
+			                            Width="120" Height="80"
+			                            Foreground="{StaticResource ThemeForeground}"/>
+			    <TextBlock Text="Indeterminate Oval Sample" Grid.Row="1" HorizontalAlignment="Center" FontSize="16" TextWrapping="Wrap" TextAlignment="Center"/>
+		    </Grid>
+		</WrapPanel>
+		<Border HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="3">
+			<Border.Background>
+				<SolidColorBrush Color="DarkSlateGray" Opacity=".5"/>
+			</Border.Background>
+			<TextBlock Text="White Thunder Software © 2020" FontStyle="Italic" Margin="2" Cursor="Hand" MouseLeftButtonDown="UIElement_OnMouseLeftButtonDown"/>
+		</Border>
+    </Grid>
+    <!--<Grid>
 	    <Grid.RowDefinitions>
 		    <RowDefinition Height="*"/>
 		    <RowDefinition Height="Auto"/>
 	    </Grid.RowDefinitions>
-	    <xrpb:RadialProgressBar Value="{Binding Value4, UpdateSourceTrigger=PropertyChanged}"
-	                            ArcWidth="25" InnerBackgroundBrush="#31313F"
-	                            ArcDirection="Counterclockwise" ArcRotationDegree="90"
-	                            ArcMode="Shape" ShapeModeStep="30" ShapeModeWidth="10" ShapeModeShape="Rectangle"
+	    <xrpb:RadialProgressBar IsIndeterminate="True"
+	                            ArcWidth="45"
 	                            Foreground="{StaticResource ThemeForeground}"/>
 		<TextBlock Text="Solid Fill With Background" Grid.Row="1" HorizontalAlignment="Center" FontSize="16" TextWrapping="Wrap" TextAlignment="Center"/>
-    </Grid>
+    </Grid>-->
 </UserControl>
