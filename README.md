@@ -29,4 +29,4 @@ xmlns:xrpb="http://XamlRadialProgressBar/DotNet"
 </Grid>
 ```
 
-For detailed usage tips look in the [Generic.xaml](https://github.com/panthernet/XamlRadialProgressBar/blob/master/src/XamlRadialProgressBar/Samples/Sample.Shared/DesktopControl.xaml) template and sample applicaions.
+For detailed usage tips look in the Generic.xaml template and [sample applicaions](https://github.com/panthernet/XamlRadialProgressBar/blob/master/src/XamlRadialProgressBar/Samples/Sample.Shared/DesktopControl.xaml).
