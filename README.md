@@ -4,8 +4,8 @@
 Display customizable radial progress bars for all your needs.
 
 ### Platfrom support:
-* .NET Core 2.2+
-* .NET Framework 4.5.2+ 
+* .NET Core 3.1+
+* .NET Framework 4.6.1+ 
 
 ### Features
 * Customizable templates and tons of adjustable properties
@@ -29,4 +29,4 @@ xmlns:xrpb="http://XamlRadialProgressBar/DotNet"
 </Grid>
 ```
 
-For detailed usage tips look in the Generic.xaml template and sample applicaions.
+For detailed usage tips look in the Generic.xaml template and [sample application](https://github.com/panthernet/XamlRadialProgressBar/blob/master/src/XamlRadialProgressBar/Samples/Sample.Shared/DesktopControl.xaml).
