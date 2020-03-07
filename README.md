@@ -5,7 +5,7 @@ Display customizable radial progress bars for all your needs.
 
 ### Platfrom support:
 * .NET Core 3.1+
-* .NET Framework 4.5.2+ 
+* .NET Framework 4.6.1+ 
 
 ### Features
 * Customizable templates and tons of adjustable properties
