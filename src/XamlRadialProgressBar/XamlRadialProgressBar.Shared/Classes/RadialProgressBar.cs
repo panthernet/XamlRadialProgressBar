@@ -51,6 +51,21 @@ namespace XamlRadialProgressBar
                 new UIPropertyMetadata(10d));
         #endregion
 
+        #region ArcBackgroundWidth
+        /// <summary>
+        /// Gets or sets progress bar background circle width. Default value is 0 - auto size.
+        /// </summary>
+        public double ArcBackgroundWidth
+        {
+            get => (double)GetValue(ArcBackgroundWidthProperty);
+            set => SetValue(ArcBackgroundWidthProperty, value);
+        }
+
+        public static readonly DependencyProperty ArcBackgroundWidthProperty =
+            DependencyProperty.Register("ArcBackgroundWidth", typeof(double), typeof(RadialProgressBar),
+                new UIPropertyMetadata(0d));
+        #endregion
+
         #region ArcRotationDegrees
         /// <summary>
         /// Gets or sets arc rotation in degrees. 270 - clockwise top, 90 - counterclockwise top

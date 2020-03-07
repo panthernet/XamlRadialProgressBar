@@ -21,6 +21,7 @@
 		<Setter Property="ShapeModeShape" Value="Rectangle"/>
 		<Setter Property="ShapeModeUseFade" Value="True"/>
 		<Setter Property="ShapeRotationAdjustment" Value="0"/>
+		<Setter Property="ArcBackgroundWidth" Value="0"/>
 
 		<Setter Property="Template">
 			<Setter.Value>
@@ -44,6 +45,7 @@
 								   IsIndeterminate="{TemplateBinding IsIndeterminate}"
 								   IndeterminateSpeedRatio="{TemplateBinding IndeterminateSpeedRatio}"
 								   Direction="{TemplateBinding ArcDirection}"
+								   ArcBackgroundWidth="{TemplateBinding ArcBackgroundWidth}"
 								   x:Name="PART_Arc">
 							<local:Arc.StartAngle>
 								<MultiBinding Converter="{StaticResource ProgressConverter}">

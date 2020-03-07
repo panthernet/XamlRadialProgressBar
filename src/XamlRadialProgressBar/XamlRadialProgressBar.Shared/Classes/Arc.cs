@@ -133,7 +133,13 @@ namespace XamlRadialProgressBar
         #region ProgressBackgroundBrush
         public static readonly DependencyProperty ProgressBackgroundBrushProperty =
             DependencyProperty.Register("ProgressBackgroundBrush", typeof(Brush), typeof(Arc),
-                new UIPropertyMetadata(Brushes.Transparent, UpdateArc));
+                new UIPropertyMetadata(Brushes.Transparent, UpdateBgArc));
+
+        private static void UpdateBgArc(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            ((Arc)d).UpdateBackgroundPen();
+            ((Arc)d).InvalidateVisual();
+        }
 
         /// <summary>
         /// Gets or sets the brush for the fill part
@@ -250,7 +256,15 @@ namespace XamlRadialProgressBar
         private volatile bool _inEnd;
         private void UpdateIndeterminate()
         {
-            if (IsIndeterminate)
+            if (!IsIndeterminate)
+            {
+                _inTimer?.Stop();
+                _inTimer?.Dispose();
+                if (_inTimer != null)
+                    SetCurrentValue(EndAngleProperty, StartAngle);
+                _inTimer = null;
+            }
+            else
             {
                 _inTimer?.Dispose();
                 _inTimer = new Timer(100 * IndeterminateSpeedRatio);
@@ -283,14 +297,6 @@ namespace XamlRadialProgressBar
                 };
                 _inTimer.Start();
             }
-            else
-            {
-                _inTimer?.Stop();
-                _inTimer?.Dispose();
-                if(_inTimer != null)
-                    SetCurrentValue(EndAngleProperty, StartAngle);
-                _inTimer = null;
-            }
         }
 
         #endregion
@@ -310,6 +316,21 @@ namespace XamlRadialProgressBar
                 new UIPropertyMetadata(1d, (o, args) => (o as Arc)?.UpdateIndeterminate()));
         #endregion
 
+        #region ArcBackgroundWidth
+        /// <summary>
+        /// Gets or sets progress bar background circle width. Default value is 0 - auto size.
+        /// </summary>
+        public double ArcBackgroundWidth
+        {
+            get => (double)GetValue(ArcBackgroundWidthProperty);
+            set => SetValue(ArcBackgroundWidthProperty, value);
+        }
+
+        public static readonly DependencyProperty ArcBackgroundWidthProperty =
+            DependencyProperty.Register("ArcBackgroundWidth", typeof(double), typeof(Arc),
+                new UIPropertyMetadata(0d, UpdateBgArc));
+        #endregion
+
         public Arc()
         {
             Loaded += (sender, args) =>
@@ -322,46 +343,66 @@ namespace XamlRadialProgressBar
 
         protected override void OnRender(DrawingContext drawingContext)
         {
+            //update pens on first pass
             if (_pen == null)
+            {
                 UpdatePen();
+                UpdateBackgroundPen();
+            }
+
+            //default and arc modes
             if (ArcMode == ArcMode.Fill || ArcMode == ArcMode.Pie)
             {
+                //calculate radius
                 var radiusX = RenderSize.Width / 2;
                 var radiusY = RenderSize.Height / 2;
                 var centerPoint = new Point(radiusX, radiusY);
 
+                //if background is set
                 if (ProgressBackgroundBrush != Brushes.Transparent)
                 {
+                    //get clip geometry
                     var clipb = GetArcGeometry(true).GetWidenedPathGeometry(
-                        _clipPen);
+                        _bgClipPen);
                     clipb.Freeze();
 
+                    //apply clip
                     drawingContext.PushClip(clipb);
+                    //fill background
                     drawingContext.DrawEllipse(ProgressBackgroundBrush, null, centerPoint, radiusX, radiusY);
                     drawingContext.Pop();
                 }
 
-                // the outlines of the "original" Arc geometry
-                var clip = GetArcGeometry().GetWidenedPathGeometry(
-                    _clipPen);
+                //get clip of the progress arc
+                var clip = GetArcGeometry().GetWidenedPathGeometry(_clipPen);
                 clip.Freeze();
 
-                // draw only in the area of the original arc
+                //apply clip
                 drawingContext.PushClip(clip);
+                //fill progress area
                 drawingContext.DrawEllipse(ProgressFillBrush, null, centerPoint, radiusX, radiusY);
+                //draw outline border if any
                 if(ProgressBorderBrush != Brushes.Transparent && ProgressBorderThickness.Top > 0)
                     drawingContext.DrawGeometry(null, _pen, clip);
                 drawingContext.Pop();
             }
             else
             {
+                //SHAPE MODE
+                //update brushes on first pass
                 if (_semiBrush1 == null)
+                {
                     UpdateInternalBrushes();
+                    //precalculate all angles for performance reasons
+                    _data = GetAngleData();
+                }
+
                 //var minAngle = Math.Min(StartAngle, EndAngle);
                 var maxAngle = Math.Max(StartAngle, EndAngle);
+                //get number of draw passes to process
                 var max = Math.Round(maxAngle / ShapeModeStep);
-                _data = _data ?? GetAngleData();
                 //_data = GetAngleData(ShapeModeStep);
+
                 for (int i = 0; i < max; i++)
                 {
                     var data = _data[i];
@@ -375,8 +416,10 @@ namespace XamlRadialProgressBar
 
                     var half = ShapeModeWidth * .5;
                     var rect = new Rect(data.StartPoint.X - half, data.StartPoint.Y, ShapeModeWidth, StrokeThickness);
+                    //apply rotation to context
                     drawingContext.PushTransform(new RotateTransform(data.Angle, data.StartPoint.X, data.StartPoint.Y));
                     var brush = ProgressFillBrush;
+                    //apply transparency
                     if (ShapeModeUseFade)
                     {
                         if (i == max - 2)
@@ -386,7 +429,7 @@ namespace XamlRadialProgressBar
                         else if (i == max)
                             brush = _semiBrush3;
                     }
-
+                    //draw shape
                     drawingContext.DrawRectangle(brush, _pen, rect);
                     drawingContext.Pop();
                 }
@@ -396,6 +439,7 @@ namespace XamlRadialProgressBar
         private List<AngleData> _data;
         private Pen _pen;
         private Pen _clipPen;
+        private Pen _bgClipPen;
         private Brush _semiBrush1;
         private Brush _semiBrush2;
         private Brush _semiBrush3;
@@ -423,7 +467,7 @@ namespace XamlRadialProgressBar
             }
         }
 
-        internal void UpdatePen()
+        private void UpdatePen()
         {
             var width = ArcMode == ArcMode.Pie ? RenderSize.Width * .5 : StrokeThickness;
 
@@ -436,6 +480,21 @@ namespace XamlRadialProgressBar
             _clipPen.Freeze();
         }
 
+        private void UpdateBackgroundPen()
+        {
+            var width = ArcBackgroundWidth == 0 ? RenderSize.Width * .5 : ArcBackgroundWidth;
+            var m = PresentationSource.FromVisual(this)
+                .CompositionTarget.TransformToDevice;
+            var dpiFactor = 1 / m.M11;
+
+            _bgClipPen = new Pen(Brushes.White, width * dpiFactor);
+            _bgClipPen.Freeze();
+        }
+
+        /// <summary>
+        /// Gets all the possible angles for shapes in shape mode
+        /// </summary>
+        /// <returns></returns>
         private List<AngleData> GetAngleData()
         {
             var minAngle = Math.Min(StartAngle, EndAngle);
@@ -500,6 +559,9 @@ namespace XamlRadialProgressBar
             return geom;
         }
 
+        /// <summary>
+        /// Returns point which corresponds to the angle of the circle
+        /// </summary>
         private Point PointAtAngle(double angle, SweepDirection sweep)
         {
             var width = ArcMode == ArcMode.Pie ? RenderSize.Width * .5 : StrokeThickness;
@@ -524,6 +586,9 @@ namespace XamlRadialProgressBar
             return new Point(x, y);
         }
 
+        /// <summary>
+        /// Recalculates the shapes angles data
+        /// </summary>
         internal void RecalculateShapes()
         {
             _data = GetAngleData();

@@ -43,10 +43,10 @@
 			                           Width="100" Height="100" ArcWidth="25" InnerBackgroundBrush="#31313F"
 																			 BorderThickness="6" BorderBrush="{StaticResource ThemeForeground2}"
 			                           Foreground="{StaticResource ThemeForeground}" OuterBackgroundBrush="DarkSlateGray"/>
-          <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"
-                     FontWeight="Bold" FontSize="18">
+				<TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"
+				           FontWeight="Bold" FontSize="18">
 							<Run Text="{Binding Value3, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/><Run Text="%"/>
-          </TextBlock>
+				</TextBlock>
 			    <TextBlock Text="Solid Fill With Text" Grid.Row="1" HorizontalAlignment="Center" FontSize="16" TextWrapping="Wrap" TextAlignment="Center"/>
 		    </Grid>
 
@@ -110,6 +110,17 @@
 			                            Foreground="{StaticResource ThemeForeground}"/>
 			    <TextBlock Text="Indeterminate Oval Sample" Grid.Row="1" HorizontalAlignment="Center" FontSize="16" TextWrapping="Wrap" TextAlignment="Center"/>
 		    </Grid>
+		    <Grid>
+			    <Grid.RowDefinitions>
+				    <RowDefinition Height="*"/>
+				    <RowDefinition Height="Auto"/>
+			    </Grid.RowDefinitions>
+			    <xrpb:RadialProgressBar Value="{Binding Value2, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" HorizontalAlignment="Center"
+			                            Width="100" Height="100" ArcWidth="15" ArcBackgroundWidth="5"
+			                            Foreground="LightSeaGreen" 
+			                            OuterBackgroundBrush="DarkOliveGreen"/>
+			    <TextBlock Text="Custom Background" Grid.Row="1" HorizontalAlignment="Center" FontSize="16" TextWrapping="Wrap" TextAlignment="Center"/>
+		    </Grid>
 		</WrapPanel>
 		<Border HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="3">
 			<Border.Background>
@@ -118,6 +129,7 @@
 			<TextBlock Text="White Thunder Software © 2020" FontStyle="Italic" Margin="2" Cursor="Hand" MouseLeftButtonDown="UIElement_OnMouseLeftButtonDown"/>
 		</Border>
     </Grid>
+
     <!--<Grid>
 	    <Grid.RowDefinitions>
 		    <RowDefinition Height="*"/>
