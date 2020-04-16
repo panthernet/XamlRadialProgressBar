@@ -247,7 +247,7 @@ namespace XamlRadialProgressBar
 
         private static void UpdateIndeterminate(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            (d as Arc).UpdateIndeterminate();
+            ((Arc) d).UpdateIndeterminate();
 
             UpdateArc(d,e);
         }
@@ -364,7 +364,8 @@ namespace XamlRadialProgressBar
                     //get clip geometry
                     var clipb = GetArcGeometry(true).GetWidenedPathGeometry(
                         _bgClipPen);
-                    clipb.Freeze();
+                    if(clipb.CanFreeze)
+                        clipb.Freeze();
 
                     //apply clip
                     drawingContext.PushClip(clipb);
@@ -375,7 +376,8 @@ namespace XamlRadialProgressBar
 
                 //get clip of the progress arc
                 var clip = GetArcGeometry().GetWidenedPathGeometry(_clipPen);
-                clip.Freeze();
+                if(clip.CanFreeze)
+                    clip.Freeze();
 
                 //apply clip
                 drawingContext.PushClip(clip);
@@ -453,17 +455,20 @@ namespace XamlRadialProgressBar
 
         internal void UpdateInternalBrushes()
         {
-            if (ShapeModeUseFade)
+            if (ShapeModeUseFade && ProgressFillBrush != null)
             {
                 _semiBrush1 = ProgressFillBrush.Clone();
                 _semiBrush1.Opacity = .7;
-                _semiBrush1.Freeze();
+                if(_semiBrush1.CanFreeze)
+                    _semiBrush1.Freeze();
                 _semiBrush2 = ProgressFillBrush.Clone();
                 _semiBrush2.Opacity = .5;
-                _semiBrush2.Freeze();
+                if (_semiBrush2.CanFreeze)
+                    _semiBrush2.Freeze();
                 _semiBrush3 = ProgressFillBrush.Clone();
                 _semiBrush3.Opacity = .3;
-                _semiBrush3.Freeze();
+                if (_semiBrush3.CanFreeze)
+                    _semiBrush3.Freeze();
             }
         }
 
@@ -475,9 +480,11 @@ namespace XamlRadialProgressBar
                 .CompositionTarget.TransformToDevice;
             var dpiFactor = 1 / m.M11;
             _pen = new Pen(ProgressBorderBrush, ProgressBorderThickness.Top * dpiFactor);
-            _pen.Freeze();
+            if(_pen.CanFreeze)
+                _pen.Freeze();
             _clipPen = new Pen(Brushes.White, width * dpiFactor);
-            _clipPen.Freeze();
+            if(_clipPen.CanFreeze)
+                _clipPen.Freeze();
         }
 
         private void UpdateBackgroundPen()
@@ -488,7 +495,8 @@ namespace XamlRadialProgressBar
             var dpiFactor = 1 / m.M11;
 
             _bgClipPen = new Pen(Brushes.White, width * dpiFactor);
-            _bgClipPen.Freeze();
+            if(_bgClipPen.CanFreeze)
+                _bgClipPen.Freeze();
         }
 
         /// <summary>

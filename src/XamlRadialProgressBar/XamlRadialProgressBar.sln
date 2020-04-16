@@ -25,8 +25,10 @@ EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		XamlRadialProgressBar.Shared\XamlRadialProgressBar.Shared.projitems*{158bee8c-66e1-48f4-a207-c3ff59d7461c}*SharedItemsImports = 4
+		Samples\Sample.Shared\Sample.Shared.projitems*{739f8c19-c598-44a6-8a7a-80756a9a7902}*SharedItemsImports = 5
 		Samples\Sample.Shared\Sample.Shared.projitems*{84421fed-210f-47f7-93ea-eb7b1395574b}*SharedItemsImports = 13
 		Samples\Sample.Shared\Sample.Shared.projitems*{97521c01-dbf9-4987-a751-f7ac87b79f33}*SharedItemsImports = 4
+		XamlRadialProgressBar.Shared\XamlRadialProgressBar.Shared.projitems*{a6865dc9-b26e-4ef3-92f8-4b58e4cf1a13}*SharedItemsImports = 5
 		XamlRadialProgressBar.Shared\XamlRadialProgressBar.Shared.projitems*{b5c88ca2-578b-42d9-8075-91b973dc3973}*SharedItemsImports = 13
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
