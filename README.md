@@ -12,7 +12,7 @@ Display customizable radial progress bars for all your needs.
 * Different modes: Fill, Shape, Pie
 * Clockwise and counter-clockwise directions
 
-![bandicam 2020-03-05 15-26-32-011](https://user-images.githubusercontent.com/5926603/75991159-58066000-5ef6-11ea-981e-e8086c069e3d.gif)
+![wpfxpb](https://user-images.githubusercontent.com/5926603/134169236-003f3558-4c44-467c-ae21-090322a7f692.gif)
 
 
 ### Simple usage
