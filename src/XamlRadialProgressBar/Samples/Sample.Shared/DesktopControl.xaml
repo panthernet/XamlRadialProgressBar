@@ -126,7 +126,7 @@
 			<Border.Background>
 				<SolidColorBrush Color="DarkSlateGray" Opacity=".5"/>
 			</Border.Background>
-			<TextBlock Text="White Thunder Software © 2020" FontStyle="Italic" Margin="2" Cursor="Hand" MouseLeftButtonDown="UIElement_OnMouseLeftButtonDown"/>
+			<TextBlock Text="Panthernet Software © 2020-2021" FontStyle="Italic" Margin="2" Cursor="Hand" MouseLeftButtonDown="UIElement_OnMouseLeftButtonDown"/>
 		</Border>
     </Grid>
 
